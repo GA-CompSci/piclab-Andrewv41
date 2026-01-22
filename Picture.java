@@ -274,16 +274,14 @@ public class Picture extends SimplePicture {
         Pixel[][] pixels = this.getPixels2D();
         Pixel topRight = null;
         Pixel bottomLeft = null;
-        for(int row = 0; row<pixels.length;row++){
-            for(int col = 0; col < pixels[0].length ; col++){
-                if(row == col){
-                  topRight = pixels[row][col];
-                bottomLeft = pixels[-row+(pixels.length-1)][-col+(pixels[0].length-1)];
-                bottomLeft.setColor(topRight.getColor());  
-                }
-                
-            
-        } 
+        // all the rows
+        for(int row = 0; row < pixels.length; row++){
+            // only over so far as we've gone down
+            for(int col = 0; col <= row; col++){
+                bottomLeft = pixels[row][col];
+                topRight = pixels[col][row];   
+                topRight.setColor(bottomLeft.getColor()); 
+            } 
         }
 
     }
@@ -291,12 +289,31 @@ public class Picture extends SimplePicture {
     /** Mirror just part of a picture of a temple */
     public void mirrorTemple() {
         Pixel[][] pixels = this.getPixels2D();
-
+        Pixel left = null;
+        Pixel right = null;
+        for(int row = 35; row<120; row++){
+            for( int col = 0; col<270; col++){
+                left = pixels[row][col];
+                right= pixels[row][(pixels[0].length)-1-col];
+                right.setColor(left.getColor());
+            }
+        }
     }
 
-    /** Mirror just part of a picture of a snowman */
-    public void mirrorArms() {
+    
 
+    /** Mirror just part of a picture of a snowman */
+        public void mirrorArms() {
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel bottom = null;
+        Pixel top = null;
+        for(int row = 155; row<195; row++){
+            for( int col = 105; col<170; col++){
+                top = pixels[row][col];
+                bottom = pixels[(pixels.length-1)-row][col];
+                bottom.setColor(top.getColor());
+            }
+        }
     }
 
     /** Mirror just the gull */
