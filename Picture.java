@@ -310,7 +310,14 @@ public class Picture extends SimplePicture {
         for(int row = 155; row<195; row++){
             for( int col = 105; col<170; col++){
                 top = pixels[row][col];
-                bottom = pixels[(pixels.length-1)-row][col];
+                bottom = pixels[row+40][col];
+                bottom.setColor(top.getColor());
+            }
+        }
+        for(int row = 155; row<195; row++){
+            for( int col = 235; col<295; col++){
+                top = pixels[row][col];
+                bottom = pixels[row+40][col];
                 bottom.setColor(top.getColor());
             }
         }
@@ -318,7 +325,16 @@ public class Picture extends SimplePicture {
 
     /** Mirror just the gull */
     public void mirrorGull() {
-
+        Pixel[][] pixels = this.getPixels2D();
+        Pixel right = null;
+        Pixel left = null;
+        for(int row = 230; row < 325; row++){
+            for(int col = 220; col < 350; col++){
+                left = pixels[row][col];
+                right = pixels[row][400+(120-(col-220))];
+                right.setColor(left.getColor());
+            }
+        }
     }
 
     /**
@@ -348,8 +364,31 @@ public class Picture extends SimplePicture {
     /** Method to create a collage of several pictures */
     public void createCollage() {
         Pixel[][] pixels = this.getPixels2D();
+        Pixel pixel = null;
+        Picture beach = new Picture("wall.jpg");
+        beach = beach.scale(.35,.35);
+        Pixel[][] wallPixels = beach.getPixels2D();
+        for(int row = 14; row < wallPixels.length; row++){
+            for(int col = 5; col < wallPixels[0].length; col++){
+                pixel = pixels[row][col];
+                pixel.setColor(wallPixels[row][col].getColor());
+            }
+        }
+        
+        Picture barb = new Picture("barbaraS.jpg");
+        
+        for(int x = 0; x < 4; x++){
+            if(x > 1) barb.keepOnlyBlue();
+            if(x > 2) barb.keepOnlyGreen();
+            this.copy(barb, 110*x, 0);
+        }
 
-        this.popArt();
+        Picture msg = new Picture("msg.jpeg");
+        msg = msg.scale(.5,.5);
+        Pixel[][] msgPixels = msg.getPixels2D();
+        this.copy(msg, 100, 100);
+        for(int row = 0)
+    
     }
 
     /**
