@@ -365,29 +365,59 @@ public class Picture extends SimplePicture {
     public void createCollage() {
         Pixel[][] pixels = this.getPixels2D();
         Pixel pixel = null;
-        Picture beach = new Picture("wall.jpg");
-        beach = beach.scale(.35,.35);
-        Pixel[][] wallPixels = beach.getPixels2D();
+        Picture wall = new Picture("wall.jpg");
+        wall = wall.scale(.35,.35);
+        Pixel[][] wallPixels = wall.getPixels2D();
         for(int row = 14; row < wallPixels.length; row++){
             for(int col = 5; col < wallPixels[0].length; col++){
                 pixel = pixels[row][col];
                 pixel.setColor(wallPixels[row][col].getColor());
             }
         }
-        
+        Picture msg = new Picture("msg.jpg");
+        msg = msg.scale(.5,.5);
+        Pixel[][] msgPixels = msg.getPixels2D();
+        for(int row = 100; row < msgPixels.length/2+15; row++){
+            for(int col = 0; col < msgPixels[0].length/2; col++){
+                msgPixels[row][col].setGreen(255-msgPixels[row][col].getGreen());
+                msgPixels[row][col].setRed(255-msgPixels[row][col].getRed());
+                msgPixels[row][col].setBlue(255-msgPixels[row][col].getBlue());
+            }
+        }
+        this.copy(msg, 300, 200);
         Picture barb = new Picture("barbaraS.jpg");
         
         for(int x = 0; x < 4; x++){
             if(x > 1) barb.keepOnlyBlue();
-            if(x > 2) barb.keepOnlyGreen();
-            this.copy(barb, 110*x, 0);
+            if(x > 2) barb.negate();
+            this.copy(barb, 110*x, 500);
         }
 
-        Picture msg = new Picture("msg.jpeg");
-        msg = msg.scale(.5,.5);
-        Pixel[][] msgPixels = msg.getPixels2D();
-        this.copy(msg, 100, 100);
-        for(int row = 0)
+
+
+        
+        Picture island = new Picture("cumberlandIsland.jpg");
+        island = island.scale(.5, .5);
+        Pixel[][] islandPixels = island.getPixels2D();
+        int half = islandPixels.length/2;
+        int half1 = islandPixels[0].length/2;
+        for(int row = 0; row < half; row++){
+            for(int col = 0; col< half1; col++){
+                islandPixels[row][col].setGreen(255);
+            }
+        }
+        for(int row = half; row < islandPixels.length; row++){
+            for(int col = half1; col< islandPixels[0].length; col++){
+                islandPixels[row][col].setRed(255);
+            }
+        }
+        for(int row = half; row < islandPixels.length; row++){
+            for(int col = 0; col< half1; col++){
+                islandPixels[row][col].setBlue(255);
+            }
+        }
+        this.copy(island, 20, 200);
+    
     
     }
 
