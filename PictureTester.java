@@ -47,14 +47,15 @@ public class PictureTester {
 
         // ---------------
         // ACTIVITY 9
-         testEdgeDetection();
+        //testEdgeDetection();
+        //testCustomEdgeDetection();
 
         // ---EXTRA---
         // testPopArt();
         // testChromakey();
         // testEncodeAndDecode();
         // testGetCountRedOverValue(250);
-        // testSetRedToHalfValueInTopHalf();
+         testSetRedToHalfValueInTopHalf();
         // testClearBlueOverValue(200);
         // testGetAverageForColumn(0);
     }
