@@ -55,7 +55,7 @@ public class PictureTester {
         // testChromakey();
         // testEncodeAndDecode();
         // testGetCountRedOverValue(250);
-         testSetRedToHalfValueInTopHalf();
+        //testSetRedToHalfValueInTopHalf();
         // testClearBlueOverValue(200);
         // testGetAverageForColumn(0);
     }
